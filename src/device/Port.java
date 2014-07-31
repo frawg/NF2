@@ -1,5 +1,6 @@
 package device;
 
+import protocol.MACGenerator;
 import protocol.IPv4.Address;
 import protocol.IPv4.IPv4;
 
@@ -14,7 +15,7 @@ public class Port {
 	{
 		this.index = index;
 		this.speed = speed;
-		//this.mac = MACGenerate.generateMAC();
+		this.mac = MACGenerator.generateMAC();
 	}
 	
 	public String getIP() { return ip.getStringIP(); }

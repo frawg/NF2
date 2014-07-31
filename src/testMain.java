@@ -94,7 +94,7 @@ public class testMain {
 							{
 								if (!deviceJobQueue.isEmpty() && !deviceJobQueue.peek().isBroadcast())
 								{
-									curr = deviceJobQueue.take();
+								//	curr = deviceJobQueue.take();
 									portIndex = curr.getPortIndex();
 								}
 								else 
@@ -120,7 +120,7 @@ public class testMain {
 							{
 								if (!deviceJobQueue.isEmpty() && !deviceJobQueue.peek().isBroadcast())
 								{
-									curr = deviceJobQueue.take();
+							//		curr = deviceJobQueue.take();
 									portIndex = curr.getPortIndex();
 								}
 								else 
@@ -158,7 +158,7 @@ public class testMain {
 							else if (portIndex >= currentIndex.getTotalAmountofPort())
 								if (!deviceJobQueue.isEmpty() && !deviceJobQueue.peek().isBroadcast())
 								{
-									curr = deviceJobQueue.take();
+								//	curr = deviceJobQueue.take();
 									portIndex = curr.getPortIndex();
 								}
 								else 
