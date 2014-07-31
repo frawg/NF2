@@ -12,6 +12,8 @@ public class IPv4 {
 		this.subnet = new Address(Address.CIDRtoInt(subnet));
 	}
 
+	public String getStringIP() { return address.toString(); }
+	public String getStringSubnet() { return subnet.toString(); }
 	public int getIPv4() { return address.toInt(); }
 	public int getSubnet() { return subnet.toInt(); }
 	/*

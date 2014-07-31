@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 public class Address {
 	private short first, second, third, fourth;
+	private static final String ADDRESS = "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})";
+    private static final Pattern addressPattern = Pattern.compile(ADDRESS);
 	
 	public Address(int first, int second, int third, int fourth)
 	{
@@ -23,8 +25,22 @@ public class Address {
 		fourth = (short) m[3];
 	}
 	
+	public Address(String str)
+	{
+		this(matchAddress(addressPattern.matcher(str)));
+	}
+	
 	public static boolean isValid(int first, int second, int third, int fourth)
 	{ return (check(first) || check(second) || check(third) || check(fourth)); }
+	
+	private static int matchAddress(Matcher matcher) {
+        int addr = 0;
+        for (int i = 1; i <= 4; ++i) {
+            int n = Integer.parseInt(matcher.group(i));
+            addr |= ((n & 0xff) << 8*(4-i));
+        }
+        return addr;
+    }
 	
 	private static boolean check(int i)
 	{ return (i < 256 && i >= 0); }
