@@ -62,4 +62,7 @@ public class Switch extends Device{
 	
 	public int getTimeToLive() { return TimeToLive; }
 	public void setTimeToLive(int seconds) { this.TimeToLive = seconds; }
+
+	@Override
+	public int NextExit() { return ports.length; }
 }
