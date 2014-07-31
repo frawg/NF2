@@ -2,22 +2,26 @@ package device;
 
 import java.util.ArrayList;
 
+import device.elements.AwaitingFrame;
+import device.elements.AwaitingReply;
+import NetworkData.Frame;
 import NetworkEvent.NetEvent;
 import NetworkEvent.NetEventListener;
 
-public class Device {
+public abstract class Device {
 	public enum TYPE{ SWITCH, COMPUTER, HUB, ROUTER }
 	protected Port[] ports = null;
 	protected String name = null;
 	protected TYPE type = null;
 	protected ArrayList<NetEventListener> listener = null;
-	
+	protected ArrayList<AwaitingReply> awaiting = null;
 	
 	public Device(String name, int portnums, TYPE t){
 		ports = new Port[portnums];
 		this.name = name;
 		this.type = t;
 		listener = new ArrayList<NetEventListener>();
+		awaiting = new ArrayList<AwaitingReply>();
 		initPorts();
 	}
 	
@@ -38,7 +42,21 @@ public class Device {
 			return ports[index];
 	}
 	
+	public abstract int NextExit();
+	public abstract int NextExit(String str);
+	public boolean isBroadcast(int index) { return (index < ports.length); }
+	
 	public void addListener(NetEventListener l) { listener.add(l); }
+
+	protected void addAwaitingReply(AwaitingReply f) { awaiting.add(f); }
+	
+	public boolean isReplyValid(Frame f)
+	{
+		for (AwaitingReply ar : awaiting)
+			if (ar.getFrame() == f)
+				return true;
+		return false;
+	}
 	
 	public void setString(String name) { this.name = name; }
 	
